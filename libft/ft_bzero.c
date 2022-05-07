@@ -1,14 +1,26 @@
-#include "libft.h"
-//수정필요
-void    *bzero(void *ptr, size_t n)
-{
-    unsigned char   *ch;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mlee2 <mlee2@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/07 16:30:10 by mlee2             #+#    #+#             */
+/*   Updated: 2022/05/07 17:49:42 by mlee2            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-    ch = (unsigned char *)ptr;
-    while(n--)
-    {
-        ch = 0;
-        *ch++;
-    }
-    return  (ch);
+#include "libft.h"
+//수정필
+void	*ft_bzero(void *ptr, size_t	n)
+{
+	unsigned char	*ch;
+
+	ch = (unsigned char *)ptr;
+	while (n--)
+	{
+		ch = 0;
+		*ch++;
+	}
+	return (ch);
 }
