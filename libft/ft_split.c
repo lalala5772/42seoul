@@ -1,75 +1,113 @@
 #include "libft.h"
 
-int		ft_count(char const *s, char c)
+static char             **ft_free(char **result)
 {
-	int	i;
-	int	cnt;
+        int     idx;
 
-	i = 0;
-	cnt = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			i++;
-		else
-		{
-			cnt++;
-			while (s[i] && s[i] != c)
-				i++;
-		}
-	}
-	return (cnt);
+        idx = 0;
+        while (!result[idx])
+        {
+                free(result[idx++]);
+        }
+        free(result);
+        return (NULL);
 }
 
-char	*ft_create(char *word, char const *s, int k, int word_len)
+static char             *ft_strndup(const char *s, int len)
 {
-	int		i;
+        char    *res;
+        int             idx;
 
-	i = 0;
-	while (word_len > 0)
-		word[i++] = s[k - word_len--];
-	word[i] = '\0';
-	return (word);
+        res = NULL;
+        idx = 0;
+        if (len == 0)
+                return (NULL);
+        if (!(res = (char*)malloc(sizeof(char) * (len + 1))))
+        {
+                return (NULL);
+        }
+        while (idx < len)
+        {
+                res[idx] = s[idx];
+                idx++;
+        }
+        res[idx] = '\0';
+        return (res);
 }
 
-char	**ft_split2(char **result, char const *s, char c, int word_num)
+static char             *ft_create(const char *s1, char c, int *flag)
 {
-	int		i;
-	int		k;
-	int		word_len;
+        char    *arr;
+        int             idx;
 
-	i = 0;
-	k = 0;
-	word_len = 0;
-	while (s[k] && i < word_num)
-	{
-		while (s[k] && s[k] == c)
-			k++;
-		while (s[k] && s[k] != c)
-		{
-			k++;
-			word_len++;
-		}
-		if (!(result[i] = (char *)malloc(sizeof(char) * (word_len + 1))))
-			return (NULL);
-		ft_create(result[i], s, k, word_len);
-		word_len = 0;
-		i++;
-	}
-	result[i] = 0;
-	return (result);
+        *flag = 1;
+        arr = NULL;
+        idx = 0;
+        while (s1[idx] != '\0')
+        {
+                if (s1[idx] == c)
+                {
+                        arr = ft_strndup(s1, idx);
+                        if (!arr)
+                                return (NULL);
+                        return (arr);
+                }
+                else if (idx == (int)(ft_strlen(s1)) - 1)
+                {
+                        arr = ft_strndup(s1, idx + 1);
+                        if (!arr)
+                                return (NULL);
+                        return (arr);
+                }
+                idx++;
+        }
+        return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+static int              ft_word_count(const char *s, char c)
 {
-	int		word_num;
-	char	**result;
+        int             wc;
+        int             idx;
 
-	if (s == 0)
-		return (NULL);
-	word_num = ft_count(s, c);
-	if (!(result = (char **)malloc(sizeof(char *) * (word_num + 1))))
-		return (NULL);
-	ft_split2(result, s, c, word_num);
-	return (result);
+        wc = 0;
+        idx = 0;
+        while (s[idx] != '\0')
+        {
+                if ((idx == 0 && s[0] != c) ||
+                (s[idx] == c && s[idx + 1] != c && s[idx + 1] != '\0'))
+                {
+                        wc++;
+                }
+                idx++;
+        }
+        return (wc);
+}
+
+char                    **ft_split(const char *s, char c)
+{
+        char    **result;
+        char    *arr;
+        int             flag;
+        int             idx;
+        int             stridx;
+
+        stridx = 0;
+        idx = 0;
+        if (!(result = (char**)malloc(sizeof(char*) * (ft_word_count(s, c) + 1))))
+                return (NULL);
+        while (s[idx] != '\0')
+        {
+                flag = 0;
+                if (idx == 0 && s[0] != c)
+                        arr = ft_create(&s[idx], c, &flag);
+                else if ((s[idx] == c && s[idx + 1] != c && s[idx + 1] != '\0'))
+                        arr = ft_create(&s[idx + 1], c, &flag);
+                if (flag == 1 && arr == NULL)
+                        return (ft_free(result));
+                else if (flag == 1)
+                        result[stridx++] = arr;
+                idx++;
+        }
+        result[stridx] = 0;
+        return (result);
 }
