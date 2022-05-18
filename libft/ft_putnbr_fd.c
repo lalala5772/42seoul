@@ -2,21 +2,25 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		n *= -1;
-	}
+	char	str;
+
 	if (n == -2147483648)
 	{
-		ft_putchar_fd('2', fd);
-		n = -(n % 1000000000);
+		ft_putnbr_fd(n / 10, fd);
+		write(fd, "8", 1);
+		return ;
+	}
+	else if (n < 0)
+	{
+		write(fd, "-", 1);
+		n *= -1;
 	}
 	if (n >= 10)
 	{
 		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
+		str = '0' + n % 10;
 	}
 	else
-		ft_putchar_fd(n + '0', fd);
+		str = '0' + n;
+	write(fd, &str, 1);
 }
