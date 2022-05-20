@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlee2 <mlee2@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 16:30:10 by mlee2             #+#    #+#             */
-/*   Updated: 2022/05/07 17:49:42 by mlee2            ###   ########.fr       */
+/*   Created: 2022/05/07 16:30:19 by mlee2             #+#    #+#             */
+/*   Updated: 2022/05/20 21:13:17 by mlee2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//수정필
-void	*ft_bzero(void *ptr, size_t	n)
-{
-	unsigned char	*ch;
 
-	ch = (unsigned char *)ptr;
-	while (n--)
-	{
-		ch = 0;
-		*ch++;
-	}
-	return (ch);
+int	ft_isascii(int c)
+{
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
+		return (0);
 }

@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlee2 <mlee2@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 16:30:14 by mlee2             #+#    #+#             */
-/*   Updated: 2022/05/07 17:42:09 by mlee2            ###   ########.fr       */
+/*   Created: 2022/05/07 16:30:10 by mlee2             #+#    #+#             */
+/*   Updated: 2022/05/18 19:47:25 by mlee2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	isalnum(int c)
+void	ft_bzero(void *p, size_t n)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
-	else
-		return (0);
+	size_t	i;
+	char	*ptr;
+
+	ptr = (char *)p;
+	i = 0;
+	while (i < n)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return ;
 }

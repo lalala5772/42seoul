@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlee2 <mlee2@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 16:30:32 by mlee2             #+#    #+#             */
-/*   Updated: 2022/05/07 17:57:37 by mlee2            ###   ########.fr       */
+/*   Created: 2022/05/07 16:30:30 by mlee2             #+#    #+#             */
+/*   Updated: 2022/05/18 19:19:47 by mlee2            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *dest, int value, size_t count)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*ch;
-	size_t			i;
+	size_t	i;
 
-	ch = (unsigned char *)dest;
 	i = 0;
-	while (i < count)
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	if (dst < src)
 	{
-		ch[i] = (unsigned char)value;
-		i++;
+		while (i < len)
+		{
+			(((unsigned char *)dst)[i] = ((unsigned char *)src)[i]);
+			i++;
+		}
 	}
-	return (ch);
+	else
+	{
+		i = len;
+		while (i)
+		{
+			((unsigned char *)dst)[i - 1] = ((unsigned char *)src)[i - 1];
+			i--;
+		}
+	}
+	return (dst);
 }
