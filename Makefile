@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mlee2 <mlee2@student.42.fr>                +#+  +:+       +#+         #
+#    By: mir <mir@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/18 18:55:18 by mlee2             #+#    #+#              #
-#    Updated: 2022/05/18 19:46:54 by mlee2            ###   ########.fr        #
+#    Updated: 2022/05/21 10:26:24 by mir              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,18 +67,19 @@ RM		= rm -rf
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME)	: ${OBJ}
-			ar rc ${NAME} ${OBJ}
+			ar rcs ${NAME} ${OBJ}
 
 all : ${NAME}
-bonus: ${OBJ} ${BONUS_OBJ}
-			ar rc ${NAME} ${OBJ} ${BONUS_OBJ}
+
+bonus: ${OBJ} ${BONUS_OBJ} 
+			ar rcs ${NAME} ${OBJ} ${BONUS_OBJ}
 
 clean :
-			${RM} *.o 
+			${RM} ${OBJ} ${BONUS_OBJ} 
 
 fclean : clean
 			${RM} ${NAME}
 
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re bonus

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlee2 <mlee2@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mir <mir@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 16:30:28 by mlee2             #+#    #+#             */
-/*   Updated: 2022/05/20 21:15:09 by mlee2            ###   ########.fr       */
+/*   Updated: 2022/05/21 10:26:51 by mir              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	*ft_memcpy(void *dest, void *src, size_t n)
 	const char	*s;
 	size_t		i;
 
-	if (!dest || !src)
-		return (0);
 	i = 0;
 	tmp = (char *)dest;
 	s = (const char *)src;
